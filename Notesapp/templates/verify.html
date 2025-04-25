@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="otp-container">
+    <h2>Enter OTP</h2>
+
+    {% if error %}
+        <p class="error-msg">{{ error }}</p>
+    {% endif %}
+    <form method="POST" class="otp-form">
+        <div class="mb-3">
+            <label for="otp" class="form-label">OTP:</label>
+            <input type="text" class="form-control" name="otp" required>
+        </div>
+        <button type="submit" class="btn btn-success">Verify OTP</button>
+    </form>
+</div>
+{% endblock %}

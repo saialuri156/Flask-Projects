@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome,{{ username }}! </h1>
+    <p>This is your personal notes dashboard.</p>
+    
+    <div class="notes-grid">
+        {% for note in notes %}
+            <div class="note-box">
+                <div class="note-header">
+                    <span class="note-date">{{ note.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                    <div class="note-actions">
+                        <a href="{{ url_for('edit_note', note_id=note.id) }}" class="edit-button">Edit ✍</a>
+                        <a href="{{ url_for('delete_note', note_id=note.id) }}" class="delete-button">Delete</a>
+                    </div>
+                </div>
+                <p class="note-content">{{ note.content }}</p>
+            </div>
+        {% endfor %}
+
+        <div class="not-box add-new" onclick="document.getElementById('newNoteForm').style.display='block';">
+            <span class="plus-icon">+</span>
+        </div>
+        
+
+        <div id="newNoteForm" class="new-note-form" style="display:none;">
+            <form action="{{ url_for('create_note') }}" method="POST">
+                <textarea name="content" placeholder="Write your note here..." required></textarea>
+                <button type="submit">Add Note</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

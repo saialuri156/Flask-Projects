@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}E-commerce{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="{{ url_for('login') }}">
+        <p>Welcome to the Login Page</p>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Login">
+        <a href="/forgotpassword">Forgot Password?</a>
+        <p>Don't have an account?</p>
+        <a href="/register">Register Here</a>
+    </form>
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+{% endblock %}
